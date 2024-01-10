@@ -1,0 +1,4 @@
+name: MusicBooks
+version: '${project.version}'
+main: tf.tfischer.musicbooks.Main
+api-version: '1.20'
