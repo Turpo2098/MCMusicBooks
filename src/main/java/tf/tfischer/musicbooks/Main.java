@@ -1,12 +1,13 @@
 package tf.tfischer.musicbooks;
 
 import org.bukkit.plugin.java.JavaPlugin;
+import tf.tfischer.musicbooks.interpreter.commands.PlayCommand;
 
 public final class Main extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        // Plugin startup logic
+        getCommand("music").setExecutor(new PlayCommand(getServer()));
 
     }
 

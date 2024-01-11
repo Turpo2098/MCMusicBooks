@@ -68,7 +68,7 @@ public class Token {
             case NUMBER -> {
                 stringBuilder.append(number);
             }
-            case NODE -> {
+            case NOTE -> {
                 stringBuilder.append(note.toString()).append(',').append(octave);
             }
             case IDENTIFIER -> {
