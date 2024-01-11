@@ -9,6 +9,7 @@ public class Token {
     String identifier;
     Instrument  instrument;
     Note.Tone   note;
+    int octave;
     double      number;
 
     public Token(TokenType tokenType) {
@@ -25,9 +26,10 @@ public class Token {
         this.instrument = instrument;
     }
 
-    public Token(TokenType tokenType, Note.Tone note) {
+    public Token(TokenType tokenType, Note.Tone note, int octave) {
         this.tokenType = tokenType;
         this.note = note;
+        this.octave = octave;
     }
 
     public Token(double number) {
@@ -43,7 +45,7 @@ public class Token {
                 stringBuilder.append(number);
             }
             case NODE -> {
-                stringBuilder.append(note.toString());
+                stringBuilder.append(note.toString()).append(',').append(octave);
             }
             case IDENTIFIER -> {
                 stringBuilder.append(identifier);
