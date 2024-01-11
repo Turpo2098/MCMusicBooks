@@ -16,13 +16,8 @@ public class Token {
     }
 
     public Token(String identifier) {
-        try {
-            note = Note.Tone.valueOf(identifier);
-            tokenType = TokenType.NODE;
-        } catch (Exception e) {
-            tokenType = TokenType.IDENTIFIER;
-            this.identifier = identifier;
-        }
+        tokenType = TokenType.IDENTIFIER;
+        this.identifier = identifier;
     }
 
     public Token(TokenType tokenType, Instrument instrument) {

@@ -119,6 +119,15 @@ public class LazyLexer {
             case "#" -> {
                 return Optional.of(new Token(TokenType.SHARP));
             }
+            case "A","B","C","D","E","F","G" -> {
+                Note.Tone tone = Note.Tone.valueOf(str);
+                return Optional.of(new Token(TokenType.NODE, tone));
+            }
+            case "a","b","c","d","e","f","g" -> {
+                Note.Tone tone = Note.Tone.valueOf(str.toUpperCase());
+                return Optional.of(new Token(TokenType.NODE, tone));
+            }
+
             default -> {
                 try {
                     double d = Double.parseDouble(str);
