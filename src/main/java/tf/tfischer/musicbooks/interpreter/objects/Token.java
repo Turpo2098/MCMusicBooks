@@ -10,7 +10,7 @@ public class Token {
     Instrument  instrument;
     Note.Tone   note;
     int octave;
-    double      number;
+    long      number;
 
     public Token(TokenType tokenType) {
         this.tokenType = tokenType;
@@ -32,7 +32,7 @@ public class Token {
         this.octave = octave;
     }
 
-    public Token(double number) {
+    public Token(long number) {
         this.tokenType = TokenType.NUMBER;
         this.number = number;
     }
@@ -57,7 +57,7 @@ public class Token {
         return octave;
     }
 
-    public double getNumber() {
+    public long getNumber() {
         return number;
     }
 

@@ -7,9 +7,9 @@ import java.util.HashMap;
 
 public class Wait extends AMusicalAction{
     long time;
-    public Wait(Server server, Player player, double time) {
+    public Wait(Server server, Player player, long time) {
         super(server,player);
-        this.time = (long) time;
+        this.time = time;
     }
 
     @Override

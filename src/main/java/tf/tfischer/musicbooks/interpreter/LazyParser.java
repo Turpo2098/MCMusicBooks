@@ -34,7 +34,6 @@ public class LazyParser {
                 throw new ParseError("§6Ende");
             token = lexer.nextToken();
         }
-        System.out.println(token.toString());
         return token.get();
     }
 
@@ -50,7 +49,7 @@ public class LazyParser {
         throw new ParseError("Tried to get a " + tokenType + " but got " + token.getTokenType() + '!');
     }
 
-    private double parseDouble() throws ParseError{
+    private long parseLong() throws ParseError{
         return parseTokenType(TokenType.NUMBER).getNumber();
     }
 
@@ -122,7 +121,7 @@ public class LazyParser {
                 return Optional.of(parsePlayNote(firstToken));
             }
             case WAIT -> {
-                return Optional.of(new Wait(server,player,parseDouble()));
+                return Optional.of(new Wait(server,player, parseLong()));
             }
             case DEF -> {
                 String identifier = parseIdentifier();

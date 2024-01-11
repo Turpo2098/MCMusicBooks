@@ -200,8 +200,8 @@ public class LazyLexer {
 
             default -> {
                 try {
-                    double d = Double.parseDouble(str);
-                    return Optional.of(new Token(d));
+                    long l = Long.parseLong(str);
+                    return Optional.of(new Token(l));
                 } catch (Exception ignored){};
                 return Optional.of(new Token(str));
             }
