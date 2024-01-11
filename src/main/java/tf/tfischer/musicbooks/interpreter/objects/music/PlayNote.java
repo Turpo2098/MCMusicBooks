@@ -1,9 +1,6 @@
 package tf.tfischer.musicbooks.interpreter.objects.music;
 
-import org.bukkit.Instrument;
-import org.bukkit.Location;
-import org.bukkit.Note;
-import org.bukkit.Server;
+import org.bukkit.*;
 import org.bukkit.entity.Player;
 
 import java.util.HashMap;
