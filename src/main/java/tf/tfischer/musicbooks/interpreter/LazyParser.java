@@ -115,6 +115,9 @@ public class LazyParser {
         TokenType tokenType = firstToken.getTokenType();
 
         switch (tokenType) {
+            case IDENTIFIER -> {
+                return Optional.of(new Identifier(server,player,firstToken.getIdentifier()));
+            }
             case INSTRUMENT -> {
                 return Optional.of(parsePlayNote(firstToken));
             }
