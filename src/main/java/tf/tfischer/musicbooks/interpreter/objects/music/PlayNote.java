@@ -7,6 +7,7 @@ import org.bukkit.Server;
 import org.bukkit.entity.Player;
 
 import java.util.HashMap;
+import java.util.Objects;
 
 public class PlayNote extends AMusicalAction{
     private final Note note;
@@ -22,9 +23,7 @@ public class PlayNote extends AMusicalAction{
     @Override
     public void execute(HashMap<String, MusicalAction> definitions) {
         Location location = player.getLocation();
-        server.getOnlinePlayers().stream()
-                .filter(p   -> p.getWorld().equals(location.getWorld()) && p.getLocation().distance(location) <= DISTANCE)
-                .forEach(p -> p.playNote(location,instrument,note));
+        Objects.requireNonNull(location.getWorld()).playNote(location,instrument,note);
     }
 
     public void playerSound(Player player, Location location){
