@@ -37,6 +37,30 @@ public class Token {
         this.number = number;
     }
 
+    public TokenType getTokenType() {
+        return tokenType;
+    }
+
+    public String getIdentifier() {
+        return identifier;
+    }
+
+    public Instrument getInstrument() {
+        return instrument;
+    }
+
+    public Note.Tone getNote() {
+        return note;
+    }
+
+    public int getOctave() {
+        return octave;
+    }
+
+    public double getNumber() {
+        return number;
+    }
+
     @Override
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder("{Token: ");
