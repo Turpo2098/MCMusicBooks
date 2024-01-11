@@ -124,11 +124,11 @@ public class LazyLexer {
             }
             case "A","B","C","D","E","F","G" -> {
                 Note.Tone tone = Note.Tone.valueOf(str);
-                return Optional.of(new Token(TokenType.NOTE, tone,2));
+                return Optional.of(new Token(TokenType.NOTE, tone,1));
             }
             case "a","b","c","d","e","f","g" -> {
                 Note.Tone tone = Note.Tone.valueOf(str.toUpperCase());
-                return Optional.of(new Token(TokenType.NOTE, tone,1));
+                return Optional.of(new Token(TokenType.NOTE, tone,0));
             }
 
             //Instruments
