@@ -11,7 +11,7 @@ import java.util.Optional;
 
 public class LazyLexer {
 
-    private List<String> inputPages;
+    private final List<String> inputPages;
     private String currentPage;
 
     private int pagePos = 0;
@@ -57,25 +57,12 @@ public class LazyLexer {
         stringPos++;
     }
 
-    private void pop(int n){
-        for(int i = 0; i<n;i++){
-            pop();
-        }
-    }
 
     private char peek(){
         if(stringPos >= currentPage.length()){ //Handle a new Page as a new Lines
             return '\n';
         }
         return currentPage.charAt(stringPos);
-    }
-
-    private char peek(int n){
-        int newPos = stringPos + n;
-        if(newPos >= currentPage.length()){ //Handle a new Page as a new Lines
-            return '\n';
-        }
-        return currentPage.charAt(stringPos + n);
     }
 
     public String nextString(){
@@ -202,7 +189,7 @@ public class LazyLexer {
                 try {
                     long l = Long.parseLong(str);
                     return Optional.of(new Token(l));
-                } catch (Exception ignored){};
+                } catch (Exception ignored){}
                 return Optional.of(new Token(str));
             }
         }
