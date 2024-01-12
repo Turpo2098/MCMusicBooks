@@ -10,8 +10,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import tf.tfischer.musicbooks.interpreter.Story;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class PlayCommand implements CommandExecutor, TabCompleter {
 
@@ -21,6 +20,12 @@ public class PlayCommand implements CommandExecutor, TabCompleter {
         this.server = server;
     }
 
+    Set<Player> activePlayers = new HashSet<>();
+
+    private boolean isActive(Player player){
+        return activePlayers.contains(player);
+    }
+
     @Override
     public boolean onCommand(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String s, @NotNull String[] strings) {
         if(!(commandSender instanceof Player player)){
@@ -28,8 +33,14 @@ public class PlayCommand implements CommandExecutor, TabCompleter {
             return true;
         }
 
-        System.out.println(player.getName());
-        new Story(player, server).start();
+        if(isActive(player)){
+            player.sendMessage("§6You already have music active.");
+            return true;
+        }
+
+        activePlayers.add(player);
+
+        new Story(player, server,activePlayers).start();
         return true;
     }
 

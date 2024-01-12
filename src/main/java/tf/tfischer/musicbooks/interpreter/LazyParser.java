@@ -46,7 +46,7 @@ public class LazyParser {
 
         if(tokenType.equals(token.getTokenType()))
             return token;
-        throw new ParseError("Tried to get a " + tokenType + " but got " + token.getTokenType() + '!');
+        throw new ParseError("§4Tried to get a " + tokenType + " but got " + token.getTokenType() + '!');
     }
 
     private long parseLong() throws ParseError{
@@ -69,7 +69,7 @@ public class LazyParser {
             token = nextToken();
         }
         if(!token.getTokenType().equals(TokenType.NOTE)){
-            throw new ParseError("Tried to get a Note but got a" + token.getTokenType() + "!");
+            throw new ParseError("§4Tried to get a Note but got a" + token.getTokenType() + "!");
         }
 
         Note note = new Note(token.getOctave(),token.getNote(),sharpened);

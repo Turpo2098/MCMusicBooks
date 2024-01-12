@@ -10,16 +10,19 @@ import tf.tfischer.musicbooks.interpreter.objects.music.MusicalAction;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 public class Story extends Thread{
     LazyParser lazyParser;
     ItemStack itemStack;
     Player player;
     Server server;
+    Set<Player> activePlayers;
 
-    public Story(Player player, Server server) {
-        this.player = player;
-        this.server = server;
+    public Story(Player player, Server server, Set<Player> activePlayers) {
+        this.player         = player;
+        this.server         = server;
+        this.activePlayers  = activePlayers;
 
         itemStack = player.getInventory().getItemInMainHand();
 
@@ -47,10 +50,14 @@ public class Story extends Thread{
         return material.equals(Material.WRITTEN_BOOK) || material.equals(Material.WRITABLE_BOOK);
     }
 
+    private void removePlayer(){
+        activePlayers.remove(player);
+    }
+
     @Override
     public void run() {
         if(!hasSameBookInHand()){
-            interrupt();
+            removePlayer();
             return;
         }
         HashMap<String,MusicalAction> definitions = new HashMap<>();
@@ -59,7 +66,8 @@ public class Story extends Thread{
             try {
                 Optional<MusicalAction> musicalActionOptional = lazyParser.parseNextAction();
                 if (musicalActionOptional.isEmpty()) {
-                    player.sendMessage("§6Ended the Music.");
+                    player.sendMessage("§6Ended the music because it failed to parse something..");
+                    removePlayer();
                     return;
                 }
 
@@ -68,11 +76,10 @@ public class Story extends Thread{
 
             } catch (ParseError | InterruptedException e) {
                 player.sendMessage(e.getMessage());
-                System.out.println("Ende");
+                removePlayer();
                 return;
             }
         }
-
-        System.out.println("Ende");
+        removePlayer();
     }
 }
