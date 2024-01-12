@@ -14,7 +14,7 @@ import java.util.Optional;
 
 public class LazyParser {
     private final LazyLexer lexer;
-    private Server server;
+    private final Server server;
     private final Player player;
 
     public LazyParser(Server server, List<String> book, Player player){
@@ -53,10 +53,6 @@ public class LazyParser {
         return parseTokenType(TokenType.NUMBER).getNumber();
     }
 
-    private void parseDefinition() throws ParseError {
-        parseTokenType(TokenType.DEF);
-    }
-
     private String parseIdentifier() throws ParseError{
         return parseTokenType(TokenType.IDENTIFIER).getIdentifier();
     }
@@ -72,12 +68,7 @@ public class LazyParser {
             throw new ParseError("§4Tried to get a Note but got a" + token.getTokenType() + "!");
         }
 
-        Note note = new Note(token.getOctave(),token.getNote(),sharpened);
-        return note;
-    }
-
-    private Instrument parseInstrument() throws ParseError{
-        return parseTokenType(TokenType.INSTRUMENT).getInstrument();
+        return new Note(token.getOctave(),token.getNote(),sharpened);
     }
 
     private PlayNote parsePlayNote(Token firstToken) throws ParseError{
@@ -126,7 +117,7 @@ public class LazyParser {
             case DEF -> {
                 String identifier = parseIdentifier();
                 Optional<MusicalAction> musicalActionOptional = parseNextAction();
-                if(!musicalActionOptional.isPresent())
+                if(musicalActionOptional.isEmpty())
                     throw new ParseError("Failed to parse a MusicalAction!");
                 MusicalAction musicalAction = musicalActionOptional.get();
                 return Optional.of(new Define(server,player,identifier,musicalAction));
