@@ -53,6 +53,7 @@ public class LazyLexer {
                 return;
             }
             currentPage = inputPages.get(pagePos);
+            return;
         }
         stringPos++;
     }
