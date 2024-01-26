@@ -55,7 +55,7 @@ hrp g
 ~~~  
   
 
-
+~~~
 Grammar:
 start 		::= instruction*
 instruction 	::= instrument sharp? note
@@ -65,8 +65,8 @@ instruction 	::= instrument sharp? note
 		  | identifier
 identifier	::= [a-zA-Z]+
 sound		::= instrument sharp? note
-
-
+~~~
+~~~
 instrument: 
   bass guitar		bsg
   bass drum		bsd
@@ -90,3 +90,4 @@ note:
 
 Sharp:
  Úse a # before the Note
+~~~
