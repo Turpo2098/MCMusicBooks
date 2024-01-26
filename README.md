@@ -20,7 +20,7 @@ WARNING: \
 If there is something it is unable to parse the Program stops. There are
 also NO Comments
 
-Explenation:
+Explanation:
 1. It is possible to play a Sound with "instrument note" for example:
 ~~~
 hrp f   //Plays with a Harp f
