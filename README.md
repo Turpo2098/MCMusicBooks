@@ -1,5 +1,5 @@
-Welcome to my MCMusicBook Plugin for Spigot. It's an easy way to compact
-music from Note Blocks into only one book.
+Welcome to my MCMusicBook Plugin for Spigot. It's an easy way to write
+music from Note Blocks into only one book and play it.
 
 It's my first try for a Domain Specific Language with an Lazy Parser(
 so it only Evaluates when it has to).
