@@ -4,7 +4,7 @@ import org.bukkit.*;
 import org.bukkit.entity.Player;
 
 import java.util.HashMap;
-import java.util.Objects;
+import java.util.stream.Stream;
 
 public class PlayNote extends AMusicalAction{
     private final Note note;
@@ -20,7 +20,9 @@ public class PlayNote extends AMusicalAction{
     @Override
     public void execute(HashMap<String, MusicalAction> definitions) {
         Location location = player.getLocation();
-        Objects.requireNonNull(location.getWorld()).playNote(location,instrument,note);
+        World world = location.getWorld();
+        Stream<? extends Player> playerStream = getPlayersInDistance();
+        playerStream.forEach(p -> p.playNote(location,instrument,note));
     }
 
     public void playerSound(Player player, Location location){
