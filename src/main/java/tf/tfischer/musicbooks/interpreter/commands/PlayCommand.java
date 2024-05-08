@@ -1,5 +1,6 @@
 package tf.tfischer.musicbooks.interpreter.commands;
 
+import org.bukkit.Material;
 import org.bukkit.Server;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -30,6 +31,11 @@ public class PlayCommand implements CommandExecutor, TabCompleter {
     public boolean onCommand(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String s, @NotNull String[] strings) {
         if(!(commandSender instanceof Player player)){
             commandSender.sendMessage("You need to be a player");
+            return true;
+        }
+        Material material = player.getInventory().getItemInMainHand().getType();
+        if(!(material.equals(Material.WRITABLE_BOOK) || material.equals(Material.WRITTEN_BOOK))){
+            player.sendMessage("§6You need to have a book in your main hand.");
             return true;
         }
 
