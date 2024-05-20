@@ -27,14 +27,14 @@ public class Story extends Thread{
         itemStack = player.getInventory().getItemInMainHand();
 
         if(!isBook(itemStack.getType())){
-            player.sendMessage("You need to hav a book in your MainHand.");
+            player.sendMessage("§6[§eMusic§6] §eDu musst ein Buch in der Hand halten!");
             return;
         }
 
         BookMeta bookMeta = (BookMeta) itemStack.getItemMeta();
 
         if(bookMeta == null){
-            player.sendMessage("You can't read the pages!");
+            player.sendMessage("§6[§eMusic§6] §eDu kannst das Buch nicht lesen!");
             return;
         }
 
@@ -66,7 +66,7 @@ public class Story extends Thread{
             try {
                 Optional<MusicalAction> musicalActionOptional = lazyParser.parseNextAction();
                 if (musicalActionOptional.isEmpty()) {
-                    player.sendMessage("§6Ended the music because it failed to parse something..");
+                    player.sendMessage("§6[§eMusic§6] §eDie Musik hat aufgehört zu spielen, weil die Noten nicht richtig sind!");
                     removePlayer();
                     return;
                 }

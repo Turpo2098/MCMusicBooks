@@ -30,17 +30,17 @@ public class PlayCommand implements CommandExecutor, TabCompleter {
     @Override
     public boolean onCommand(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String s, @NotNull String[] strings) {
         if(!(commandSender instanceof Player player)){
-            commandSender.sendMessage("You need to be a player");
+            commandSender.sendMessage("§6[§eMusic§6] §eDu musst ein Spieler sein.");
             return true;
         }
         Material material = player.getInventory().getItemInMainHand().getType();
         if(!(material.equals(Material.WRITABLE_BOOK) || material.equals(Material.WRITTEN_BOOK))){
-            player.sendMessage("§6You need to have a book in your main hand.");
+            player.sendMessage("§6[§eMusic§6] §eDu musst ein Buch in der Hand halten.");
             return true;
         }
 
         if(isActive(player)){
-            player.sendMessage("§6You already have music active.");
+            player.sendMessage("§6[§eMusic§6] §eDeine Musik spielt bereits.");
             return true;
         }
 
