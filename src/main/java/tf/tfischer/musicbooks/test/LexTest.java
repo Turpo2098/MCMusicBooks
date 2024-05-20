@@ -10,8 +10,9 @@ public class LexTest {
         //page1 = "< Hallo jsadh A B C D E F G #D";
         //page2 = ">>>SS<s";
         //page3 = "sda as";
-        page4 = "hrp";
-        List<String> book = List.of(page4);
+        page1 = "";
+        page4 = "flu g";
+        List<String> book = List.of(page1,page4);
         LazyLexer lexer = new LazyLexer(book);
         while (!lexer.isFinished()){
             System.out.println(lexer.nextString());
