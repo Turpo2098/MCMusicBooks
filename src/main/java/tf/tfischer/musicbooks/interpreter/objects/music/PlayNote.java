@@ -20,7 +20,6 @@ public class PlayNote extends AMusicalAction{
     @Override
     public void execute(HashMap<String, MusicalAction> definitions) {
         Location location = player.getLocation();
-        World world = location.getWorld();
         Stream<? extends Player> playerStream = getPlayersInDistance();
         playerStream.forEach(p -> p.playNote(location,instrument,note));
     }
