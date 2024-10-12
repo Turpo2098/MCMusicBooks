@@ -7,19 +7,17 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.BookMeta;
 import tf.tfischer.musicbooks.interpreter.objects.music.MusicalAction;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 
 public class Story extends Thread{
+    public boolean stoping = false;
     LazyParser lazyParser;
     ItemStack itemStack;
     Player player;
     Server server;
-    Set<Player> activePlayers;
+    Map<Player,Story> activePlayers;
 
-    public Story(Player player, Server server, Set<Player> activePlayers) {
+    public Story(Player player, Server server, Map<Player,Story> activePlayers) {
         this.player         = player;
         this.server         = server;
         this.activePlayers  = activePlayers;
@@ -62,7 +60,7 @@ public class Story extends Thread{
         }
         HashMap<String,MusicalAction> definitions = new HashMap<>();
 
-        while(!lazyParser.isFinished()) {
+        while(!stoping && !lazyParser.isFinished()) {
             try {
                 Optional<MusicalAction> musicalActionOptional = lazyParser.parseNextAction();
                 if (musicalActionOptional.isEmpty()) {

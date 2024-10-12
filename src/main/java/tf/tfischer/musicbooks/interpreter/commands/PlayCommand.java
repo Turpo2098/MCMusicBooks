@@ -21,10 +21,10 @@ public class PlayCommand implements CommandExecutor, TabCompleter {
         this.server = server;
     }
 
-    Set<Player> activePlayers = new HashSet<>();
+    HashMap<Player,Story> playerStoryMap = new HashMap<>();
 
     private boolean isActive(Player player){
-        return activePlayers.contains(player);
+        return playerStoryMap.containsKey(player);
     }
 
     @Override
@@ -33,6 +33,17 @@ public class PlayCommand implements CommandExecutor, TabCompleter {
             commandSender.sendMessage("You need to be a player");
             return true;
         }
+        if(strings.length == 1 && strings[0].equals("stop")){
+            Story story = playerStoryMap.get(player);
+            if(story == null){
+                player.sendMessage("§6You currently play no music");
+                return true;
+            }
+            story.stoping = true;
+            player.sendMessage("§6You stopped the music");
+            return true;
+        }
+
         Material material = player.getInventory().getItemInMainHand().getType();
         if(!(material.equals(Material.WRITABLE_BOOK) || material.equals(Material.WRITTEN_BOOK))){
             player.sendMessage("§6You need to have a book in your main hand.");
@@ -43,16 +54,19 @@ public class PlayCommand implements CommandExecutor, TabCompleter {
             player.sendMessage("§6You already have music active.");
             return true;
         }
+        Story story =  new Story(player, server, playerStoryMap);
+        story.start();
+        playerStoryMap.put(player,story);
 
-        activePlayers.add(player);
 
-        new Story(player, server,activePlayers).start();
         return true;
     }
 
     @Nullable
     @Override
     public List<String> onTabComplete(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String s, @NotNull String[] strings) {
+        if(strings.length == 1)
+            return List.of("stop");
         return new ArrayList<>();
     }
 }
