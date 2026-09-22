@@ -31,7 +31,7 @@ public class LazyParser {
         Optional<Token> token = lexer.nextToken();
         while (token.isEmpty()){
             if(lexer.isFinished())
-                throw new ParseError("§6Ende");
+                throw new ParseError("§6[§eMusic§6] §eEnde des Buches erreicht!");
             token = lexer.nextToken();
         }
         return token.get();
@@ -46,7 +46,7 @@ public class LazyParser {
 
         if(tokenType.equals(token.getTokenType()))
             return token;
-        throw new ParseError("§4Tried to get a " + tokenType + " but got " + token.getTokenType() + '!');
+        throw new ParseError("§6[§eMusic§6] §cVersucht einen " + tokenType + " aber bekam " + token.getTokenType() + '!');
     }
 
     private long parseLong() throws ParseError{
@@ -65,7 +65,7 @@ public class LazyParser {
             token = nextToken();
         }
         if(!token.getTokenType().equals(TokenType.NOTE)){
-            throw new ParseError("§4Tried to get a Note but got a" + token.getTokenType() + "!");
+            throw new ParseError("§6[§eMusic§6] §cVersucht eine Note zu bekommen aber einen " + token.getTokenType() + " bekommen!");
         }
 
         return new Note(token.getOctave(),token.getNote(),sharpened);
@@ -90,11 +90,11 @@ public class LazyParser {
                     return new Bundle(server,player,list);
                 }
                 default -> {
-                    throw new ParseError("Tried to parse something instead of a Note");
+                    throw new ParseError("§6[§eMusic§6] §cVersucht etwas zu parsen was keine Note ist!");
                 }
             }
         }
-        throw new ParseError("You didn't close the bundle.");
+        throw new ParseError("§6[§eMusic§6] §cDu hast das Bundle nicht geschlossen.");
     }
 
     public Optional<MusicalAction> parseNextAction() throws ParseError{
@@ -118,7 +118,7 @@ public class LazyParser {
                 String identifier = parseIdentifier();
                 Optional<MusicalAction> musicalActionOptional = parseNextAction();
                 if(musicalActionOptional.isEmpty())
-                    throw new ParseError("Failed to parse a MusicalAction!");
+                    throw new ParseError("§6[§eMusic§6] §cFehlgeschlagen eine MusicalAction zu parsen!");
                 MusicalAction musicalAction = musicalActionOptional.get();
                 return Optional.of(new Define(server,player,identifier,musicalAction));
             }
